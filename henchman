@@ -70,6 +70,12 @@ hm_execute() {
 ## Private ##
 #############
 
+##
+# Determine if env var exists and has a value
+#
+# ${1} - env var
+# return - boolean
+##
 hm_env_var_exist?(){
     _hm_require_params $# 1 "$*"
     local env_var=${1}
@@ -81,10 +87,11 @@ hm_env_var_exist?(){
     echo ${response}
 }
 
-
-# Create file if it doesn't exist
+##
+# Determine if file exists
 #
 # ${1} - filename with/without path
+# return - boolean
 ##
 hm_file_exist?() {
     _hm_require_params $# 1 "$*"
@@ -97,9 +104,11 @@ hm_file_exist?() {
     echo ${response}
 }
 
+##
 # Create file if it doesn't exist
 #
 # ${1} - filename with/without path
+# return - none
 ##
 hm_file_create_if_not_present() {
     _hm_require_params $# 1 "$*"
@@ -112,6 +121,8 @@ hm_file_create_if_not_present() {
 
 ##
 # Get current working directory (directory that houses BASH entry point)
+#
+# return - string
 ##
 hm_get_working_directory() {
     _hm_require_params $# 0 "$*"
