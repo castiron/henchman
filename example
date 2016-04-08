@@ -1,0 +1,65 @@
+#!/bin/bash
+###################
+##~~~~~~~~~~~~~~~##
+##~~~~Example~~~~##
+##~~~~~~~~~~~~~~~##
+###################
+# Call upon the Henchman
+source "henchman"
+# Your scripting should happen inside the main function: main(){ ...something scripty... }
+main() {
+    # 1) Variables
+    echo -e "1) Variables\n"
+    local var_scope="I'm scoped to the main function"
+    local some_var="I can be assigned inline"
+    local another_var
+    another_var="or first declared then assigned later"
+    echo "var_scope: ${var_scope}"
+    echo "some_var: ${some_var}"
+    echo "another_var: ${another_var}"
+    echo -e "\n\n"
+
+
+    # 2) Handling Henchman return value
+    echo -e "2) Handling Henchman return value\n"
+    ## Inline assignment
+    local working_dir
+    echo "hm_execute hm_get_working_directory && working_dir=\${hm_return}"
+    hm_execute hm_get_working_directory && working_dir=${hm_return}
+    echo "working_dir: ${working_dir}"
+
+    ## Use return value without assignment
+    ## Note: ${hm_return} will be overwritten on subsequent Henchman function call
+    echo "hm_execute hm_file_exist? \"\${working_dir}/README.md\""
+    hm_execute hm_file_exist? "${working_dir}/README.md"
+    if [ ${hm_return} ]
+    then
+        echo "${working_dir}/README.md really exists!"
+    else
+        echo "${working_dir}/README.md does not exist."
+    fi
+    echo -e "\n\n"
+
+
+    # 3) Main parameters
+    echo -e "3) Main parameters\n"
+    ## Example script called with params: example param1 param2
+    ## Henchman stores these in global vars to allow for the bootstrap process to work the way that it does.
+    echo "I was passed ${main_params_count} params."
+    echo "And here are the params: ${main_params}"
+    echo -e "\n\n"
+
+
+    # 4) Error handling
+    echo -e "4) Error handling\n"
+    ## Henchman provides some basic parameter validation and error handling
+    ## When an error is thrown a basic call stack is displayed and the pid is killed to ensure all execution halts.
+
+    # Call Henchman function with too many parameters
+    echo "Example of function call with too many parameters:"
+    echo "hm_execute hm_file_exist? \"this\" \"that\" \"something\""
+    hm_execute hm_file_exist? "this" "that" "something"
+}
+# Call Henchman bootstrap function and pass special parameter: $0
+# This loads up Henchman and runs your main() function
+hm_bootstrap $0
