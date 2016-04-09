@@ -20,7 +20,7 @@ Refer to the example script to get a better understanding of how to setup your s
 
 ### Functions
 
-The functions included with Henchman are not called directly. Use the `hm_execute` wrapper function as this allows for manageable return values and error handling.
+The functions included with Henchman are not called directly. Use the `hm_do` wrapper function as this allows for manageable return values and error handling.
 
 #### hm_env_var_exist?() ${1}
 ```
@@ -31,7 +31,7 @@ The functions included with Henchman are not called directly. Use the `hm_execut
 # return - boolean
 ##
 ```
-`hm_execute hm_env_var_exist? BOXEN_HOME && my_bool=${hm_return}`
+`hm_do hm_env_var_exist? BOXEN_HOME && my_bool=${hm_return}`
 
 ***
 
@@ -44,7 +44,7 @@ The functions included with Henchman are not called directly. Use the `hm_execut
 # return - boolean
 ##
 ```
-`hm_execute hm_file_exist? ~/somepath/afile.txt && my_bool=${hm_return}`
+`hm_do hm_file_exist? ~/somepath/afile.txt && my_bool=${hm_return}`
 
 ***
 
@@ -57,8 +57,8 @@ The functions included with Henchman are not called directly. Use the `hm_execut
 # return - none
 ##
 ```
-`hm_execute hm_file_create_if_not_present some-file.txt`
-`hm_execute hm_file_create_if_not_present ~/somepath/some-file.txt`
+`hm_do hm_file_create_if_not_present some-file.txt`
+`hm_do hm_file_create_if_not_present ~/somepath/some-file.txt`
 
 ***
 
@@ -70,4 +70,4 @@ The functions included with Henchman are not called directly. Use the `hm_execut
 # return - string
 ##
 ```
-`hm_execute hm_get_working_directory && my_string=${hm_return}`
+`hm_do hm_get_working_directory && my_string=${hm_return}`

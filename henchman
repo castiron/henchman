@@ -37,7 +37,7 @@ henchman() {
     # Wrapper that handles responses from Henchman functions
     #
     ##
-    hm_execute() {
+   hm_do() {
         local response
         local response_code
         response=$($*)
@@ -177,7 +177,7 @@ henchman() {
 
     ##
     # Kills the script
-    # Only called by hm_execute() after output of error if non success response is received
+    # Only called by hm_do() after output of error if non success response is received
     ##
     _hm_halt() {
         kill ${PID}
