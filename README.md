@@ -58,6 +58,7 @@ The functions included with Henchman are not called directly. Use the `hm_do` wr
 ##
 ```
 `hm_do hm_file_create_if_not_present some-file.txt`
+
 `hm_do hm_file_create_if_not_present ~/somepath/some-file.txt`
 
 ***
