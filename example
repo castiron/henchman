@@ -4,8 +4,7 @@
 ##~~~~Example~~~~##
 ##~~~~~~~~~~~~~~~##
 ###################
-# Call upon the Henchman
-source "henchman"
+
 # Your scripting should happen inside the main function: main(){ ...something scripty... }
 main() {
     # 1) Variables
@@ -60,6 +59,6 @@ main() {
     echo "hm_execute hm_file_exist? \"this\" \"that\" \"something\""
     hm_execute hm_file_exist? "this" "that" "something"
 }
-# Call Henchman bootstrap function and pass special parameter: $0
-# This loads up Henchman and runs your main() function
-hm_bootstrap $0
+
+# Call upon the Henchman
+source "henchman"
