@@ -76,7 +76,7 @@ hm_execute() {
 # ${1} - env var
 # return - boolean
 ##
-hm_env_var_exist?(){
+hm_env_var_exist?() {
     _hm_require_params $# 1 "$*"
     local env_var=${1}
     local response=false
