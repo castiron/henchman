@@ -5,6 +5,10 @@
 ##~~~~~~~~~~~~~~~##
 ###################
 
+# See Option 2 in "Call upon the Henchman"
+henchman_version="v1.0"
+henchman_location="/tmp"
+
 # Your scripting should happen inside the main function: main(){ ...something scripty... }
 main() {
     # 1) Variables
@@ -61,4 +65,28 @@ main() {
 }
 
 # Call upon the Henchman
-source "henchman"
+
+# Option 1 - Local development / static deployment
+# source "henchman"
+
+# Option 2 - Dynamic loading
+# Note: relies on version and location to store henchman to be passed as params
+henchman_load() {
+    local hm_url="https://raw.githubusercontent.com/castiron/henchman/${1}/henchman"
+    local hm_local_file="${2}/henchman-${1}"
+    echo -e "Attempting to fetch Henchman ${1}\n"
+    if [ -e ${hm_local_file} ]
+    then
+        echo -e "Henchman ${1} is ready for action."
+    else
+        if hash curl 2>/dev/null; then
+            curl ${hm_url} -o ${hm_local_file}
+        elif hash wget 2>/dev/null; then
+            wget ${hm_url} -O ${hm_local_file}
+        else
+            echo "Error! curl or wget required to fetch Henchman."
+        fi
+    fi
+    source ${hm_local_file}
+}
+henchman_load ${henchman_version} ${henchman_location}
