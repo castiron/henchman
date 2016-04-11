@@ -6,7 +6,7 @@
 ###################
 
 # See Option 2 in "Call upon the Henchman"
-henchman_version="v1.0"
+henchman_version="v1.1"
 henchman_location="/tmp"
 
 # Your scripting should happen inside the main function: main(){ ...something scripty... }
