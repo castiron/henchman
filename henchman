@@ -195,7 +195,7 @@ henchman() {
 #
 ##
 hm_bootstrap() {
-    if [[ $0 == ./*  ]]
+    if [[ $0 == */*  ]]
     then
         henchman
         main
