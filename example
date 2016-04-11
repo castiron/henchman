@@ -89,4 +89,5 @@ henchman_load() {
     fi
     source ${hm_local_file}
 }
+# Minified: henchman_load() { local hm_url="https://raw.githubusercontent.com/castiron/henchman/${1}/henchman";local hm_local_file="${2}/henchman-${1}";echo -e "Attempting to fetch Henchman ${1}\n";if [ -e ${hm_local_file} ];then echo -e "Henchman ${1} is ready for action.";else if hash curl 2>/dev/null;then curl ${hm_url} -o ${hm_local_file};elif hash wget 2>/dev/null;then wget ${hm_url} -O ${hm_local_file};else echo "Error! curl or wget required to fetch Henchman.";fi;fi;source ${hm_local_file}; }
 henchman_load ${henchman_version} ${henchman_location}
