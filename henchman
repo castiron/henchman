@@ -27,8 +27,16 @@
 ###########
 
 ## Store parameters passed to parent script being executed
-main_params=$@
 main_params_count=$#
+main_params_list=$@
+main_params=()
+if [ ${main_params_count} -gt 0 ]
+then
+    for var in "$@"
+    do
+        main_params+=(${var})
+    done
+fi
 
 hm_return=''
 
