@@ -6,7 +6,7 @@
 ###################
 
 # See Option 2 in "Call upon the Henchman"
-henchman_version="v1.1"
+henchman_version="v1.2"
 henchman_location="/tmp"
 
 # Your scripting should happen inside the main function: main(){ ...something scripty... }
@@ -49,7 +49,13 @@ main() {
     ## Example script called with params: example param1 param2
     ## Henchman stores these in global vars to allow for the bootstrap process to work the way that it does.
     echo "I was passed ${main_params_count} params."
-    echo "And here are the params: ${main_params}"
+    echo "Here is the param list: ${main_params_list}"
+    echo "for param in \"\${main_params[@]}\""
+    for param in "${main_params[@]}"
+    do
+        :
+        echo "${param}"
+    done
     echo -e "\n\n"
 
 
@@ -67,27 +73,29 @@ main() {
 # Call upon the Henchman
 
 # Option 1 - Local development / static deployment
-# source "henchman"
+henchman_load() {
+    source "henchman"
+}
 
 # Option 2 - Dynamic loading
 # Note: relies on version and location to store henchman to be passed as params
-henchman_load() {
-    local hm_url="https://raw.githubusercontent.com/castiron/henchman/${1}/henchman"
-    local hm_local_file="${2}/henchman-${1}"
-    echo -e "Attempting to fetch Henchman ${1}\n"
-    if [ -e ${hm_local_file} ]
-    then
-        echo -e "Henchman ${1} is ready for action."
-    else
-        if hash curl 2>/dev/null; then
-            curl ${hm_url} -o ${hm_local_file}
-        elif hash wget 2>/dev/null; then
-            wget ${hm_url} -O ${hm_local_file}
-        else
-            echo "Error! curl or wget required to fetch Henchman."
-        fi
-    fi
-    source ${hm_local_file}
-}
-# Minified: henchman_load() { local hm_url="https://raw.githubusercontent.com/castiron/henchman/${1}/henchman";local hm_local_file="${2}/henchman-${1}";echo -e "Attempting to fetch Henchman ${1}\n";if [ -e ${hm_local_file} ];then echo -e "Henchman ${1} is ready for action.";else if hash curl 2>/dev/null;then curl ${hm_url} -o ${hm_local_file};elif hash wget 2>/dev/null;then wget ${hm_url} -O ${hm_local_file};else echo "Error! curl or wget required to fetch Henchman.";fi;fi;source ${hm_local_file}; }
-henchman_load ${henchman_version} ${henchman_location}
+#henchman_load() {
+#    local hm_url="https://raw.githubusercontent.com/castiron/henchman/${henchman_version}/henchman"
+#    local hm_local_file="${henchman_location}/henchman-${henchman_version}"
+#    echo -e "Attempting to fetch Henchman ${henchman_version}\n"
+#    if [ -e ${hm_local_file} ]
+#    then
+#        echo -e "Henchman ${1} is ready for action."
+#    else
+#        if hash curl 2>/dev/null; then
+#            curl ${hm_url} -o ${hm_local_file}
+#        elif hash wget 2>/dev/null; then
+#            wget ${hm_url} -O ${hm_local_file}
+#        else
+#            echo "Error! curl or wget required to fetch Henchman."
+#        fi
+#    fi
+#    source ${hm_local_file}
+#}
+# Minified: henchman_load() { local hm_url="https://raw.githubusercontent.com/castiron/henchman/${henchman_version}/henchman";local hm_local_file="${henchman_location}/henchman-${henchman_version}";echo -e "Attempting to fetch Henchman ${henchman_version}\n";if [ -e ${hm_local_file} ];then echo -e "Henchman ${1} is ready for action.";else if hash curl 2>/dev/null;then curl ${hm_url} -o ${hm_local_file};elif hash wget 2>/dev/null;then wget ${hm_url} -O ${hm_local_file};else echo "Error! curl or wget required to fetch Henchman.";fi;fi;source ${hm_local_file}; }
+henchman_load $@
