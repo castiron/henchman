@@ -64,6 +64,8 @@ The functions included with Henchman are not called directly. Use the `hm_do` wr
 ```
 `hm_do hm_file_create_if_not_present some-file.txt`
 
+or
+
 `hm_do hm_file_create_if_not_present ~/somepath/some-file.txt`
 
 ***
@@ -77,3 +79,20 @@ The functions included with Henchman are not called directly. Use the `hm_do` wr
 ##
 ```
 `hm_do hm_get_working_directory && my_string=${hm_return}`
+
+***
+
+#### hm_script_dependencies()
+```
+##
+# Check array of dependencies in the calling script
+#
+# ${1}..${#} - list of program dependencies for calling script
+##
+```
+`hm_do hm_do hm_script_dependencies bundle php ruby`
+
+or
+
+`deps=(bundle php ruby)`
+`hm_do hm_do hm_script_dependencies ${deps[@]}`

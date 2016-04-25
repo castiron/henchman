@@ -18,7 +18,7 @@
 
 
 # Release Information
-# v1.2
+# v1.2.1
 # Spurlock
 
 
@@ -137,6 +137,19 @@ henchman() {
         fi
         local response=$(dirname ${scriptFilePath})
         echo ${response}
+    }
+
+    ##
+    # Check list of dependencies
+    #
+    # ${1}..{} - list of program dependencies in main()
+    ##
+    hm_script_dependencies() {
+        for dependency in "${@}"
+        do
+            echo "Dep: ${dependency}"
+            _hm_require_dependency ${dependency}
+        done
     }
 
     ##
