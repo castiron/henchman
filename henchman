@@ -147,7 +147,6 @@ henchman() {
     hm_script_dependencies() {
         for dependency in "${@}"
         do
-            echo "Dep: ${dependency}"
             _hm_require_dependency ${dependency}
         done
     }
