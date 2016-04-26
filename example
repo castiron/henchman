@@ -6,8 +6,9 @@
 ###################
 
 # See Option 2 in "Call upon the Henchman"
-henchman_version="v1.2.1.1"
+henchman_version="v1.2.2"
 henchman_location="/tmp"
+#henchman_debug=true
 
 # Your scripting should happen inside the main function: main(){ ...something scripty... }
 main() {
@@ -58,9 +59,18 @@ main() {
     done
     echo -e "\n\n"
 
+    # 4) Examples
+    echo -e "4) Examples\n"
+    install_composer(){
+        echo "Callback install_composer() called because dependency 'composerr' doesn't exist."
+    }
+    echo "hm_do hm_script_dependency_with_callback composerr install_composer && echo ${hm_return}"
+    hm_do hm_script_dependency_with_callback composerr install_composer && echo ${hm_return}
 
-    # 4) Error handling
-    echo -e "4) Error handling\n"
+    echo -e "\n\n"
+
+    # 5) Error handling
+    echo -e "5) Error handling\n"
     ## Henchman provides some basic parameter validation and error handling
     ## When an error is thrown a basic call stack is displayed and the pid is killed to ensure all execution halts.
 
