@@ -1,7 +1,7 @@
 #!/bin/bash
-henchman_version="" # Add version ex. v1.2
+henchman_version="" # Add version ex. v1.2.2
 henchman_location="" # Add location to store henchman ex. /tmp
-
+henchman_debug=true
 # Your scripting should happen inside the main function: main(){ ...something scripty... }
 main() {
     echo 'replace me with something scripty'
