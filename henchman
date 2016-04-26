@@ -56,6 +56,7 @@ henchman() {
         local response_code
         response=$($*)
         response_code=$?
+        if [ ${henchman_debug} ]; then echo -e "[HENCHMAN DEBUG]\nCall:\n hm_do $*\nResponse code: ${response_code}\nResponse:\n ${response}\n[/HENCHMAN DEBUG]"; fi
         if [[ ${response_code} == 0 ]]
         then
             hm_return=${response}
