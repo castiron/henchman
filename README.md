@@ -96,3 +96,23 @@ or
 
 `deps=(bundle php ruby)`
 `hm_do hm_do hm_script_dependencies ${deps[@]}`
+
+***
+
+#### hm_script_dependency_with_callback()
+```
+##
+# Execute callback to handle install if dependency doesn't exist
+#
+# ${1} - name of program
+# ${2} - name of callback function nested in main()
+##
+```
+Silent execution of callback function `install_composer(){}`
+`hm_do hm_script_dependency_with_callback composer install_composer`
+
+or
+
+Display output from callback function `install_composer(){}`
+`hm_do hm_script_dependency_with_callback composer install_composer && echo ${hm_return}`
+

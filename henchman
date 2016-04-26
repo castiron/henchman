@@ -18,7 +18,7 @@
 
 
 # Release Information
-# v1.2.1
+# v1.2.2
 # Spurlock
 
 
@@ -152,14 +152,35 @@ henchman() {
     }
 
     ##
+    # Execute callback to handle install if dependency doesn't exist
+    #
+    # ${1} - name of program
+    # ${2} - name of callback function nested in main()
+    ##
+    hm_script_dependency_with_callback() {
+        _hm_require_params $# 2 "$*"
+        local dep_exists=$(_hm_require_dependency ${1} true)
+        if [ ! ${dep_exists} ];then
+            local response=$(${2})
+            echo ${response}
+        fi
+    }
+
+    ##
     # Check for specific program and throw error if missing
     #
     # ${1} - name of program
+    # ${2} - return boolean instead of throwing error (optional)
     ##
     _hm_require_dependency() {
-        _hm_require_params $# 1 "$*"
         if ! hash ${1} 2>/dev/null; then
-            _hm_throw_error "A required dependency isn't installed: ${1}"
+            if [ ${2} ]; then
+                echo ''
+            else
+                _hm_throw_error "A required dependency isn't installed: ${1}"
+            fi
+        else
+            if [ ${2} ]; then echo true; fi
         fi
     }
 
