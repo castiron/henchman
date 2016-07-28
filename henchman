@@ -122,6 +122,18 @@ henchman() {
     }
 
     ##
+    # Get list of files in dir 
+    #
+    # ${1} - path to directory
+    # ${2} - constraint pattern (optional)
+    # return - array
+    ##
+    hm_get_files_in_directory() {
+        local response=$(ls -p ${1} | grep "${2}" | grep -v / )
+        echo ${response}
+    }
+
+    ##
     # Get current working directory (directory that houses BASH entry point)
     #
     # return - string

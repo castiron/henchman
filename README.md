@@ -70,6 +70,20 @@ or
 
 ***
 
+#### hm_get_files_in_directory()
+```
+##
+# Get list of files in dir 
+#
+# ${1} - path to directory
+# ${2} - constraint pattern (optional)
+# return - array
+##
+```
+`hm_do hm_get_files_in_directory ~/somepath/somedir/ .not_these`
+
+***
+
 #### hm_get_working_directory()
 ```
 ##
