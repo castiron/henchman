@@ -29,7 +29,7 @@ main() {
     ## Inline assignment
     local working_dir
     echo "hm_do hm_get_working_directory && working_dir=\${hm_return}"
-    hm_do hm_get_working_directory 'nope' && working_dir=${hm_return}
+    hm_do hm_get_working_directory && working_dir=${hm_return}
     echo "working_dir: ${working_dir}"
 
     ## Use return value without assignment
