@@ -78,7 +78,7 @@ henchman() {
     # return - boolean
     ##
     hm_env_var_exist?() {
-        _hm_require_params $# 1 "$*"
+        _hm_require_params $# "$*" 1 0
         local env_var=${1}
         local response=false
         if [[ "${!env_var}" != "" ]]
@@ -96,7 +96,7 @@ henchman() {
     # return - boolean
     ##
     hm_file_exist?() {
-        _hm_require_params $# 1 "$*"
+        _hm_require_params $# "$*" 1 0
         local file_path=${1}
         local response=true
         if [ -e ${file_path} ]
@@ -113,7 +113,7 @@ henchman() {
     # return - none
     ##
     hm_file_create_if_not_present() {
-        _hm_require_params $# 1 "$*"
+        _hm_require_params $# "$*" 1 0
         local file_path=${1}
         if [ ! -e ${file_path} ]
         then
@@ -129,6 +129,7 @@ henchman() {
     # return - array
     ##
     hm_get_files_in_directory() {
+        _hm_require_params $# "$*" 1 1
         local response=$(ls -p ${1} | grep "${2}" | grep -v / )
         echo ${response}
     }
@@ -139,7 +140,7 @@ henchman() {
     # return - string
     ##
     hm_get_working_directory() {
-        _hm_require_params $# 0 "$*"
+        _hm_require_params $# "$*" 0 0
         local platform=$(uname)
         if [[ "${platform}" == "Darwin" ]]
         then
@@ -171,7 +172,7 @@ henchman() {
     # ${2} - name of callback function nested in main()
     ##
     hm_script_dependency_with_callback() {
-        _hm_require_params $# 2 "$*"
+        _hm_require_params $# "$*" 2 0
         local dep_exists=$(_hm_require_dependency ${1} true)
         if [ ! ${dep_exists} ];then
             local response=$(${2})
@@ -186,6 +187,7 @@ henchman() {
     # ${2} - return boolean instead of throwing error (optional)
     ##
     _hm_require_dependency() {
+        _hm_require_params $# "$*" 1 1
         if ! hash ${1} 2>/dev/null; then
             if [ ${2} ]; then
                 echo ''
@@ -201,13 +203,16 @@ henchman() {
     # Compare expected/received params for a function.
     #
     # ${1} - param count received ($#)
-    # ${2} - param count expected
-    # ${3} - params passed
+    # ${2} - params passed
+    # ${3} - required param count expected
+    # ${4} - optional param count expected
+    #
     ##
     _hm_require_params() {
-        if [[ ! "${1}" == "${2}" ]]
+        local allowed_params=$[ ${3} + ${4} ]
+        if [[  ${1} > ${allowed_params} ]]
         then
-            _hm_throw_error "Passed ${1} params to: ${FUNCNAME[1]} but requires ${2}.\nParams passed: ${3}"
+            _hm_throw_error "Passed ${1} params to: ${FUNCNAME[1]} but allows ${allowed_params}.\nParams passed: ${2}"
         fi
     }
 
