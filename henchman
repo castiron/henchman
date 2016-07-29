@@ -122,6 +122,38 @@ henchman() {
     }
 
     ##
+    # Determine if directory exists
+    #
+    # ${1} - directory with/without path
+    # return - boolean
+    ##
+    hm_directory_exist?() {
+        _hm_require_params $# "$*" 1 0
+        local dir_path=${1}
+        local response=false
+        if [ -d ${dir_path} ]
+        then
+            response=true
+        fi
+        echo ${response}
+    }
+
+    ##
+    # Create directory if it doesn't exist
+    #
+    # ${1} - directory with/without path
+    # return - none
+    ##
+    hm_directory_create_if_not_present() {
+        _hm_require_params $# "$*" 1 0
+        local dir_path=${1}
+        if [ ! -d ${dir_path} ]
+        then
+            mkdir ${dir_path}
+        fi
+    }
+
+    ##
     # Get list of files in dir 
     #
     # ${1} - path to directory

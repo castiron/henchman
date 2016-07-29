@@ -70,6 +70,32 @@ or
 
 ***
 
+#### hm_directory_exist?() ${1}
+```
+##
+# Determine if directory exists
+#
+# ${1} - directory with/without path
+# return - boolean
+##
+```
+`hm_do hm_directory_exist? ~/somepath/somedir && my_bool=${hm_return}`
+
+***
+
+####  hm_directory_create_if_not_present() ${1}
+```
+##
+# Create directory if it doesn't exist
+#
+# ${1} - directory with/without path
+# return - none
+##
+```
+`hm_do hm_directory_create_if_not_present ~/somepath/somedir`
+
+***
+
 #### hm_get_files_in_directory()
 ```
 ##
