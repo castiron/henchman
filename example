@@ -36,7 +36,7 @@ main() {
     ## Note: ${hm_return} will be overwritten on subsequent Henchman function call
     echo "hm_do hm_file_exist? \"\${working_dir}/README.md\""
     hm_do hm_file_exist? "${working_dir}/README.md"
-    if [ ${hm_return} ]
+    if [ ${hm_return} = true ]
     then
         echo "${working_dir}/README.md really exists!"
     else

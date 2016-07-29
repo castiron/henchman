@@ -98,7 +98,7 @@ henchman() {
     hm_file_exist?() {
         _hm_require_params $# "$*" 1 0
         local file_path=${1}
-        local response=true
+        local response=false
         if [ -e ${file_path} ]
         then
             response=true
