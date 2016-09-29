@@ -56,7 +56,9 @@ henchman() {
         local response_code
         response=$($*)
         response_code=$?
-        if [ ${henchman_debug} == true ]; then echo -e "[HENCHMAN DEBUG]\nCall:\n hm_do $*\nResponse code: ${response_code}\nResponse:\n ${response}\n[/HENCHMAN DEBUG]"; fi
+        if [ ${henchman_debug} ]; then
+            if [ ${henchman_debug} == true ]; then echo -e "[HENCHMAN DEBUG]\nCall:\n hm_do $*\nResponse code: ${response_code}\nResponse:\n ${response}\n[/HENCHMAN DEBUG]"; fi
+        fi
         if [[ ${response_code} == 0 ]]
         then
             hm_return=${response}
@@ -224,7 +226,7 @@ henchman() {
             if [ ${2} ]; then
                 echo ''
             else
-                _hm_throw_error "A required dependency isn't installed: ${1}"
+                _hm_throw_error "[!! DEPENDENCY MISSING !!]\nThe following is required but wasn't detected: ${1}\n\n"
             fi
         else
             if [ ${2} ]; then echo true; fi
@@ -261,7 +263,7 @@ henchman() {
     _hm_throw_error() {
         local hm_error
         local stack_count=3
-        hm_error="${hm_error}Error! Halting execution.\n\n${1}\n\nCall stack:\n"
+        hm_error="${hm_error}[!! ERROR OCCURRED !!]\nHalting execution of script: ${0}\n\n${1}\n\nCall stack:\n"
         for func in "${FUNCNAME[@]}"
         do
             :
@@ -291,7 +293,7 @@ hm_bootstrap() {
         henchman
         main
     else
-        printf "\nError! Halting execution.\nCall script using: scriptname or ./scriptname\nNote: This is to ensure error handling for Henchman works correctly.\n\n"
+        printf "\n[!! ERROR !!]\nHalting execution of script: ${0}\n\nCall script using: scriptname or ./scriptname\nNote: This is to ensure error handling for Henchman works correctly.\n\n"
     fi
 }
 
