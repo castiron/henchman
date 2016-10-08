@@ -73,9 +73,6 @@ henchman() {
     #
     ##
     hm_do() {
-#        echo -e ${1#hm_}
-#        ${1} = ${1#hm_}
-#        echo -e "[HENCHMAN DEBUG]\nCall:\n hm_do ${*#hm_}\n[/HENCHMAN DEBUG]";
         hm ${*#hm_}
     }
 
