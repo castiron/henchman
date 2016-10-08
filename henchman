@@ -18,8 +18,8 @@
 
 
 # Release Information
-# v1.2.5
-# Spurlock
+# v2.0.0
+# Mr. Kidd
 
 
 ###########
@@ -69,7 +69,7 @@ henchman() {
     }
 
     ##
-    # Legacy wrapper for versions <= 1.2.5
+    # Legacy wrapper for versions <= 1.2.5 (Spurlock)
     #
     ##
     hm_do() {

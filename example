@@ -6,7 +6,7 @@
 ###################
 
 # See Option 2 in "Call upon the Henchman"
-henchman_version="v1.2.5"
+henchman_version="v2.0.0"
 henchman_location="/tmp"
 henchman_debug=false
 
