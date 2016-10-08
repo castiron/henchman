@@ -28,14 +28,14 @@ main() {
     echo -e "2) Handling Henchman return value\n"
     ## Inline assignment
     local working_dir
-    echo "hm_do hm_get_working_directory && working_dir=\${hm_return}"
-    hm_do hm_get_working_directory && working_dir=${hm_return}
+    echo "hm get_working_directory && working_dir=\${hm_return}"
+    hm get_working_directory && working_dir=${hm_return}
     echo "working_dir: ${working_dir}"
 
     ## Use return value without assignment
     ## Note: ${hm_return} will be overwritten on subsequent Henchman function call
-    echo "hm_do hm_file_exist? \"\${working_dir}/README.md\""
-    hm_do hm_file_exist? "${working_dir}/README.md"
+    echo "hm file_exist? \"\${working_dir}/README.md\""
+    hm file_exist? "${working_dir}/README.md"
     if [ ${hm_return} = true ]
     then
         echo "${working_dir}/README.md really exists!"
@@ -64,8 +64,8 @@ main() {
     install_composer(){
         echo "Callback install_composer() called because dependency 'composerr' doesn't exist."
     }
-    echo "hm_do hm_script_dependency_with_callback composerr install_composer && echo ${hm_return}"
-    hm_do hm_script_dependency_with_callback composerr install_composer && echo ${hm_return}
+    echo "hm script_dependency_with_callback composerr install_composer && echo ${hm_return}"
+    hm script_dependency_with_callback composerr install_composer && echo ${hm_return}
 
     echo -e "\n\n"
 
@@ -76,8 +76,8 @@ main() {
 
     # Call Henchman function with too many parameters
     echo "Example of function call with too many parameters:"
-    echo "hm_do hm_file_exist? \"this\" \"that\" \"something\""
-    hm_do hm_file_exist? "this" "that" "something"
+    echo "hm file_exist? \"this\" \"that\" \"something\""
+    hm file_exist? "this" "that" "something"
 }
 
 # Call upon the Henchman
