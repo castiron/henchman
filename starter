@@ -1,5 +1,5 @@
 #!/bin/bash
-henchman_version="" # Add version ex. v2.0.0
+henchman_version="" # Add version ex. v2.0.1
 henchman_location="" # Add location to store henchman ex. /tmp
 henchman_debug=false
 # Your scripting should happen inside the main function: main(){ ...something scripty... }
