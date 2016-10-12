@@ -96,6 +96,47 @@ or
 
 ***
 
+#### get_absolute_path()
+```
+##
+# Get absolute path of file or directory
+#
+# ${1} - path containing relative paths
+# return - string
+##
+```
+`hm get_absolute_path ../../somepath/`
+
+***
+
+#### get_contents_in_directory()
+```
+##
+# Get list of contents in dir
+#
+# ${1} - path to directory
+# ${2} - constraint pattern (optional)
+# return - array
+##
+```
+`hm get_files_in_directory ~/somepath/somedir/ .not_these`
+
+***
+
+#### get_directories_in_directory()
+```
+##
+# Get list of directories in dir
+#
+# ${1} - path to directory
+# ${2} - constraint pattern (optional)
+# return - array
+##
+```
+`hm get_files_in_directory ~/somepath/somedir/ .not_these`
+
+***
+
 #### get_files_in_directory()
 ```
 ##

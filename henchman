@@ -164,6 +164,50 @@ henchman() {
     }
 
     ##
+    # Get absolute path of file or directory
+    #
+    # ${1} - path containing relative paths
+    # return - string
+    ##
+    get_absolute_path() {
+        _require_params $# "$*" 1 0
+        local platform=$(uname)
+        if [[ "${platform}" == "Darwin" ]]
+        then
+            local response=$(greadlink -f "${1}")
+        else
+            local response=$(readlink -f "${1}")
+        fi
+        echo ${response}
+    }
+
+    ##
+    # Get list of contents in dir
+    #
+    # ${1} - path to directory
+    # ${2} - constraint pattern (optional)
+    # return - array
+    ##
+    get_contents_in_directory() {
+        _require_params $# "$*" 1 1
+        local response=$(ls -ap ${1} | grep "${2}" | grep -v "\./" | grep -v "\../")
+        echo ${response}
+    }
+
+    ##
+    # Get list of directories in dir
+    #
+    # ${1} - path to directory
+    # ${2} - constraint pattern (optional)
+    # return - array
+    ##
+    get_directories_in_directory() {
+        _require_params $# "$*" 1 1
+        local response=$(ls -p ${1} | grep "${2}" | grep / )
+        echo ${response}
+    }
+
+    ##
     # Get list of files in dir 
     #
     # ${1} - path to directory
@@ -172,7 +216,7 @@ henchman() {
     ##
     get_files_in_directory() {
         _require_params $# "$*" 1 1
-        local response=$(ls -p ${1} | grep "${2}" | grep -v / )
+        local response=$(ls -ap ${1} | grep "${2}" | grep -v / )
         echo ${response}
     }
 
