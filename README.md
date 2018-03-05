@@ -140,7 +140,7 @@ or
 #### get_files_in_directory()
 ```
 ##
-# Get list of files in dir 
+# Get list of files in dir ordered by date descending
 #
 # ${1} - path to directory
 # ${2} - constraint pattern (optional)
